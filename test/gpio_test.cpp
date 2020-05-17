@@ -1,9 +1,6 @@
 #include <pigpio.h>
 
 #include <iostream>
-#include <pigpio.h>
-
-#include <iostream>
 
 int main() {
     gpioInitialise();
