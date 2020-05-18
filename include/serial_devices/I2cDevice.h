@@ -5,8 +5,7 @@
 
 #include <cstdint>
 
-template<class T>
-class I2cDevice : public SerialDevice<T>
+class I2cDevice : public SerialDevice
 {
     private:
         static const uint8_t I2C_FLAGS = 0;

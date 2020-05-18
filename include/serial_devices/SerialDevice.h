@@ -8,8 +8,8 @@
 class SerialDevice
 {
     public:
-        virtual void Start(uint8_t interval) = 0;
-        virtual void Stop() = 0;
+        virtual void Initialize() = 0;
+        virtual void Terminate() = 0;
         virtual uint8_t GetSerialData(uint8_t addr) = 0;
 };
 

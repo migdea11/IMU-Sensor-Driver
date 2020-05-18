@@ -18,10 +18,12 @@
 class Mpu9250I2c : public I2cDevice
 {
     private:
-        AccSensor acc_sensor; // TODO change to smart pointer
+        AccSensor *acc_sensor; // TODO change to smart pointer
     public:
         Mpu9250I2c();
         ~Mpu9250I2c();
+
+        AccData GetAccData();
 
 
     private:
@@ -31,8 +33,8 @@ class Mpu9250I2c : public I2cDevice
         static const uint8_t I2C_BUS_00 = 0x0;
         static const uint8_t I2C_BUS_01 = 0x1;
 
-        static const uint8_t ACCEL_CONFIG_DATA_1 = 0x0 // TODO change to configurable
-        static const uint8_t ACCEL_CONFIG_DATA_2 = 0x0 // TODO change to configurable
+        static const uint8_t ACCEL_CONFIG_DATA_1 = 0x0; // TODO change to configurable
+        static const uint8_t ACCEL_CONFIG_DATA_2 = 0x0; // TODO change to configurable
 
         /*
          * Register Definitions

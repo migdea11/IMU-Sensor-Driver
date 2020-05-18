@@ -20,6 +20,12 @@ all: i2c_devices.o acc_sensor.o mpu_i2c.o
 # gpio_test.o:
 # 	$(CXX) $(CXX_FLAGS) -c $(TEST)/gpio_test.cpp -o $(BIN)/gpio_test.o
 
+acc_i2c_test: acc_i2c_test.o i2c_devices.o acc_sensor.o mpu_i2c.o
+	$(CXX) $(LD_FLAGS) -o $(BIN)/acc_i2c_test $(BIN)/*.o $(LD_LIBS)
+
+acc_i2c_test.o:
+	$(CXX) $(CXX_FLAGS) -c $(TEST)/acc_i2c_test.cpp -o $(BIN)/acc_i2c_test.o
+
 i2c_devices.o:
 	$(CXX) $(CXX_FLAGS) -c $(SRC)/serial_devices/I2cDevice.cpp -o $(BIN)/i2c_devices.o
 

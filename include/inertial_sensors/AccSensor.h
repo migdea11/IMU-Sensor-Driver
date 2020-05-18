@@ -14,11 +14,11 @@ class AccData
         const int16_t acc_z;
 
     public:
-        AccData(int16_t x, int16_t y, int16_t z);
-        ~AccData();
-        int16_t get_x();
-        int16_t get_y();
-        int16_t get_z();
+        AccData(int16_t x, int16_t y, int16_t z); // : acc_x(x), acc_y(y), acc_z(z) {}
+        ~AccData(); // {}
+        int16_t GetX(); // { return acc_x; }
+        int16_t GetY(); // { return acc_y; }
+        int16_t GetZ(); // { return acc_z; }
 };
 
 class AccSensor : public InertialSensor<AccData>
@@ -36,10 +36,10 @@ class AccSensor : public InertialSensor<AccData>
 
     public:
         // Single byte register constructor
-        AccSensor(SerialDevice<AccData> &device, int8_t addr_x, int8_t addr_y, int8_t addr_z,
+        AccSensor(SerialDevice &device, int8_t addr_x, int8_t addr_y, int8_t addr_z,
                 int16_t min, int16_t max);
         // Double byte register constructor
-        AccSensor(SerialDevice<AccData> &device, int8_t addr_x0, int8_t addr_x1, int8_t addr_y0, int8_t addr_y1,
+        AccSensor(SerialDevice &device, int8_t addr_x0, int8_t addr_x1, int8_t addr_y0, int8_t addr_y1,
                 int8_t addr_z0,  int8_t addr_z1, int16_t min, int16_t max);
         ~AccSensor();
         AccData GetData() override;

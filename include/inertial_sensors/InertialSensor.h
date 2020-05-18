@@ -9,9 +9,9 @@ template<class T>
 class InertialSensor
 {
     protected:
-        SerialDevice<T> &serial_device;
+        SerialDevice &serial_device;
     public:
-        InertialSensor(SerialDevice<T> &device);
+        InertialSensor(SerialDevice &device);
         ~InertialSensor();
         virtual T GetData() = 0;
 };
