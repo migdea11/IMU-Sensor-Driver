@@ -9,16 +9,23 @@
 class AccData
 {
     private:
-        const int16_t acc_x;
-        const int16_t acc_y;
-        const int16_t acc_z;
+        const int16_t acc_raw_x;
+        const int16_t acc_raw_y;
+        const int16_t acc_raw_z;
+        const float acc_x;
+        const float acc_y;
+        const float acc_z;
 
     public:
-        AccData(int16_t x, int16_t y, int16_t z); // : acc_x(x), acc_y(y), acc_z(z) {}
-        ~AccData(); // {}
-        int16_t GetX(); // { return acc_x; }
-        int16_t GetY(); // { return acc_y; }
-        int16_t GetZ(); // { return acc_z; }
+        AccData(int16_t raw_x, int16_t raw_y, int16_t raw_z, float x, float y, float z);
+        ~AccData();
+        int16_t GetRawX();
+        int16_t GetRawY();
+        int16_t GetRawZ();
+
+        float GetX();
+        float GetY();
+        float GetZ();
 };
 
 class AccSensor : public InertialSensor<AccData>
@@ -26,6 +33,8 @@ class AccSensor : public InertialSensor<AccData>
     private:
         const int16_t RANGE_MIN;
         const int16_t RANGE_MAX;
+        const float SCALE_M;
+        const int16_t SCALE_B;
 
         const int8_t ADDR_ACC_X_L;
         const int8_t ADDR_ACC_X_H;
@@ -43,6 +52,11 @@ class AccSensor : public InertialSensor<AccData>
                 int8_t addr_z0,  int8_t addr_z1, int16_t min, int16_t max);
         ~AccSensor();
         AccData GetData() override;
+
+        inline float ConvertData(uint16_t raw_data)
+        {
+            return SCALE_M * static_cast<int16_t>(raw_data);// + SCALE_B;
+        }
 };
 
 #endif // ACC_SENSOR_H

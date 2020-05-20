@@ -11,8 +11,8 @@ class InertialSensor
     protected:
         SerialDevice &serial_device;
     public:
-        InertialSensor(SerialDevice &device);
-        ~InertialSensor();
+        InertialSensor(SerialDevice &device) : serial_device(device) {}
+        ~InertialSensor() {}
         virtual T GetData() = 0;
 };
 
