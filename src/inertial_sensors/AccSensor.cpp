@@ -36,18 +36,12 @@ AccSensor::~AccSensor() {}
 
  AccData AccSensor::GetData()
  {
-    // TODO might need to replace with i2c_read_word_data()
-    // uint16_t x = ADDR_ACC_X_H > 0 ? serial_device.ReadSerialByte(ADDR_ACC_X_H) << 8 : 0x00;
-    // x |= serial_device.ReadSerialByte(ADDR_ACC_X_L);
-    // uint16_t y = ADDR_ACC_Y_H > 0 ? serial_device.ReadSerialByte(ADDR_ACC_Y_H) << 8 : 0x00;
-    // y |= serial_device.ReadSerialByte(ADDR_ACC_Y_L);
-    // uint16_t z = ADDR_ACC_Z_H > 0 ? serial_device.ReadSerialByte(ADDR_ACC_Z_H) << 8 : 0x00;
-    // z |= serial_device.ReadSerialByte(ADDR_ACC_Z_L);
-
-    uint16_t x = ADDR_ACC_X_H == 0 ? serial_device.ReadSerialByte(ADDR_ACC_X_L) : serial_device.ReadSerialWord(ADDR_ACC_X_H);
-    uint16_t y = ADDR_ACC_Y_H == 0 ? serial_device.ReadSerialByte(ADDR_ACC_Y_L) : serial_device.ReadSerialWord(ADDR_ACC_Y_H);
-    uint16_t z = ADDR_ACC_Z_H == 0 ? serial_device.ReadSerialByte(ADDR_ACC_Z_L) : serial_device.ReadSerialWord(ADDR_ACC_Z_H);
-
+    const uint8_t elements = 6;
+    uint8_t data[elements];
+    int8_t code = serial_device.ReadSerialBlock(ADDR_ACC_X_H, (uint8_t*)data, elements);
+    uint16_t x = ((uint16_t)data[0] << 8 | data[1]);
+    uint16_t y = ((uint16_t)data[2] << 8 | data[3]);
+    uint16_t z = ((uint16_t)data[4] << 8 | data[5]);
 
     return AccData(x, y, z, ConvertData(x), ConvertData(y), ConvertData(z));
  }

@@ -20,7 +20,7 @@ void I2cDevice::Terminate()
     gpioTerminate();
 }
 
-void OutputTransaction(std::string name, uint8_t addr, uint16_t data)
+inline void OutputTransaction(std::string name, uint8_t addr, uint16_t data) // TODO replace with macro to dissable
 {
     // std::cout<<name<<": "<<std::nouppercase << std::showbase  << std::hex<<static_cast<int>(addr)<<" -> "<<data<<" ("<<static_cast<int16_t>(data)<<")"<<std::dec<<"\n";
 }
@@ -49,4 +49,9 @@ void I2cDevice::WriteSerialWord(uint8_t addr, uint16_t data)
 {
     OutputTransaction("WriteSerialWord", addr, data);
     i2cWriteWordData(handle, addr, data);
+}
+
+int8_t I2cDevice::ReadSerialBlock(uint8_t addr, uint8_t* data, uint8_t count)
+{
+    return i2cReadI2CBlockData(handle, addr, (char*)data, count);
 }

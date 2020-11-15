@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-    Mpu9250I2c* inertial_device = new Mpu9250I2c(0x1, Mpu9250Config::I2C_ADDR_AD0, Mpu9250Config::AccConfig::RANGE_16G_BITS, Mpu9250Config::AccConfig::BW_5Hz);
+    Mpu9250I2c* inertial_device = new Mpu9250I2c(0x1, Mpu9250Config::I2C_ADDR_AD0, Mpu9250Config::AccConfig::RANGE_2G_BITS, Mpu9250Config::AccConfig::BW_184Hz);
     inertial_device->Initialize();
 
     float x = 0, y = 0, z = 0, count = 0;
@@ -23,5 +23,7 @@ int main()
 
     cout<<"Offsets"<<endl;
     cout<<x / count<<", "<<y / count<<", "<<z / count<<endl<<endl;
+
+    delete inertial_device;
     return 0;
 }

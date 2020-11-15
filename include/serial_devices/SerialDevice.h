@@ -16,6 +16,8 @@ class SerialDevice
 
         virtual uint16_t ReadSerialWord(uint8_t addr) = 0;
         virtual void WriteSerialWord(uint8_t addr, uint16_t data) = 0;
+
+        virtual int8_t ReadSerialBlock(uint8_t addr, uint8_t* data, uint8_t count) = 0;
 };
 
 #endif // SERIAL_DEVICE_H

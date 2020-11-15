@@ -25,6 +25,8 @@ class I2cDevice : public SerialDevice
 
         uint16_t ReadSerialWord(uint8_t addr) override;
         void WriteSerialWord(uint8_t addr, uint16_t data) override;
+
+        int8_t ReadSerialBlock(uint8_t addr, uint8_t* data, uint8_t count) override;
 };
 
 #endif // I2C_DEVICE_H

@@ -24,10 +24,10 @@ void Mpu9250I2c::Initialize()
 
     // Enable Accelerometer
     uint8_t pwr_reg = I2cDevice::ReadSerialByte(Mpu9250Registers::PWR_MGMT_2);
-    I2cDevice::WriteSerialByte(Mpu9250Registers::PWR_MGMT_2, Mpu9250Config::AccConfig::ACC_ENABLE_ALL & pwr_reg);
+    I2cDevice::WriteSerialByte(Mpu9250Registers::PWR_MGMT_2, Mpu9250Config::AccConfig::ACC_ENABLE_ALL | pwr_reg); // TODO fix bitwise to wipe with filter before combining
 
     I2cDevice::WriteSerialByte(Mpu9250Registers::ACCEL_CONFIG_1, acc_range << Mpu9250Config::AccConfig::ACC_RANGE_OFFSET);
-    I2cDevice::WriteSerialByte(Mpu9250Registers::ACCEL_CONFIG_2, acc_filter & Mpu9250Config::AccConfig::ACC_FILTER_ENABLE);
+    I2cDevice::WriteSerialByte(Mpu9250Registers::ACCEL_CONFIG_2, acc_filter | Mpu9250Config::AccConfig::ACC_FILTER_ENABLE);
 }
 
 AccData Mpu9250I2c::GetAccData()
