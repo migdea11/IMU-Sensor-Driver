@@ -8,15 +8,6 @@
 
 #include <cstdint>
 
-// class InertialData
-// {
-//     private:
-//         AccData acc_data; // TODO change to smart pointer
-//     public:
-//         InertialData(AccData acc)
-//         ~InertialData();
-// }
-
 class Mpu9250I2c : public I2cDevice
 {
     private:

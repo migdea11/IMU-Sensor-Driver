@@ -11,7 +11,7 @@ int main()
     inertial_device->Initialize();
 
     float x = 0, y = 0, z = 0, count = 0;
-    for (int i = 0; i < 200; ++i) {
+    for (int i = 0; i < 10; ++i) {
         AccData data = inertial_device->GetAccData();
         x += data.GetX();
         y += data.GetY();
